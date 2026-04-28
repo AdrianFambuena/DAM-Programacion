@@ -1,0 +1,118 @@
+-- RULETA RUSA --
+
+[CLASE JUEGO]
+package RuletaRusa;
+
+import java.sql.SQLOutput;
+
+public class Juego {
+
+    public static void main(String[] args) {
+
+        System.out.println("\n -- LA RULETA RUSA -- ");
+        System.out.println();
+        Revolver revolver = new Revolver();
+
+        Jugador[] jugadores = new Jugador[2];
+        for (int i = 0; i < jugadores.length; i++) {
+            jugadores[i] = new Jugador(i + 1);
+        }
+
+        boolean finJuego = false;
+
+        while (!finJuego) {
+            for (Jugador jugador : jugadores) {
+                jugador.disparar(revolver);
+                if (!jugador.isVivo()) {
+                    finJuego = true;
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Fin del juego");
+    }
+}
+
+[CLASE JUGADOR]
+package RuletaRusa;
+
+public class Jugador {
+
+    // Atributos
+    private final int id;
+    private final String nombre;
+    private boolean vivo;
+
+    // Constructor
+    public Jugador(int id) {
+        this.id = id;
+        this.nombre = "Jugador " + id;
+        this.vivo = true;
+    }
+
+    // Función disparar
+    public void disparar(Revolver r) {
+        System.out.println(nombre + " se apunta...");
+
+        if (r.disparar()) {
+            vivo = false;
+            System.out.println(nombre + " HA MUERTO ");
+        } else {
+            System.out.println(nombre + " sigue vivo ");
+        }
+
+        // Mostrar información del revolver
+        System.out.println(r.toString());
+        System.out.println("------------------------");
+    }
+
+    public boolean isVivo() {
+        return vivo;
+    }
+}
+
+[CLASE REVOLVER]
+package RuletaRusa;
+import java.util.Random;
+
+public class Revolver {
+
+    // Atributos
+    private int posicionActual;
+    private int posicionBala;
+
+    // Constructor
+    public Revolver() {
+        generarPosiciones();
+    }
+
+    // Metodo privado para generar posiciones aleatorias
+    private void generarPosiciones() {
+        Random random = new Random();
+        posicionActual = random.nextInt(6) + 1; // 1 a 6
+        posicionBala = random.nextInt(6) + 1;   // 1 a 6
+    }
+
+    // Función disparar
+    public boolean disparar() {
+        boolean resultado = (posicionActual == posicionBala);
+        siguienteBala();
+
+        return resultado;
+    }
+
+    // Avanza el tambor
+    public void siguienteBala() {
+        posicionActual = (posicionActual+1)%6;
+    }
+
+    // Información del revolver
+    @Override
+    public String toString() {
+        return "Revolver { " +
+                "posicionActual = " + posicionActual +
+                ", posicionBala = " + posicionBala +
+                " }";
+    }
+}
