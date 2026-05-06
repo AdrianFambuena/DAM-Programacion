@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación Java | Adrián Fambuena</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #020617;
+      color: #e2e8f0;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(2,6,23,0.8);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    header p {
+      margin-top: 15px;
+      color: #94a3b8;
+      animation: fadeUp 1s ease forwards 0.3s;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 100px 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      border-left: 4px solid #38bdf8;
+      padding-left: 10px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: #0f172a;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #1e293b;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #38bdf8;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #64748b;
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <strong>Java DAM</strong>
+  <div>
+    <a href="#tecnologias">Tecnologías</a>
+    <a href="#contenidos">Contenidos</a>
+    <a href="#poo">POO</a>
+    <a href="#avanzado">Avanzado</a>
+  </div>
+</nav>
+
+<header>
+  <h1>💻 Módulo de Programación</h1>
+  <p>1º DAM · Adrián Fambuena</p>
+</header>
+
+<section id="tecnologias">
+  <h2>🛠️ Tecnologías y Herramientas</h2>
+  <div class="card">
+    <ul>
+      <li>Java (JDK 17+)</li>
+      <li>IntelliJ IDEA</li>
+      <li>Lógica de programación y POO</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contenidos">
+  <h2>📁 Fundamentos y Estructuras</h2>
+  <div class="card">
+    <ul>
+      <li>Estructuras de control: for, while, if, switch</li>
+      <li>Operadores lógicos</li>
+      <li>Arrays y matrices</li>
+    </ul>
+  </div>
+</section>
+
+<section id="poo">
+  <h2>🧠 Programación Orientada a Objetos</h2>
+  <div class="grid">
+    <div class="card">
+      <p><strong>Clases y Objetos:</strong> Modelado, constructores y métodos</p>
+    </div>
+    <div class="card">
+      <p><strong>Pilares:</strong> Herencia, Polimorfismo, Encapsulamiento, Abstracción</p>
+    </div>
+    <div class="card">
+      <p><strong>Interfaces:</strong> Diseño modular y contratos</p>
+    </div>
+  </div>
+</section>
+
+<section id="avanzado">
+  <h2>⚡ Gestión Avanzada</h2>
+  <div class="grid">
+    <div class="card">
+      <p><strong>Colecciones:</strong> ArrayList, HashMap</p>
+    </div>
+    <div class="card">
+      <p><strong>Excepciones:</strong> Control de errores</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🔗 Navegación</h2>
+  <p>
+    <a href="https://github.com/AdrianFambuena/Portfolio-AdrianFambuena">
+      ⬅️ Volver al Portfolio Principal
+    </a>
+  </p>
+</section>
+
+<section>
+  <h2>📫 Contacto</h2>
+  <p>adrianfampa@gmail.com</p>
+</section>
+
+<footer>
+  <p>© 2026 Adrián Fambuena</p>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
